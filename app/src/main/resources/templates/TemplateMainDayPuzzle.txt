@@ -7,10 +7,17 @@ import aoc.project.util.AocUtil;
 import org.apache.commons.lang3.time.StopWatch;
 
 public class Day{{dayString}}Puzzle {
+    public static void main(String[] args) {
+        Day{{dayString}}Puzzle puzzle = new Day{{dayString}}Puzzle();
+
+        puzzle.part1();
+        //puzzle.part2();
+    }
+
     public void part1() {
         System.out.println("Executing Day {{dayString}} Part 1...");
         List<String> lines = AocUtil
-                .readFile("src/main/resources/puzzleInputs/year{{yearString}}/day{{dayString}}Puzzle.txt");
+                .readFile("app/src/main/resources/puzzleInputs/year{{yearString}}/day{{dayString}}Puzzle.txt");
 
         StopWatch stopWatch = StopWatch.createStarted();
         long result = doPart1(lines);
@@ -23,7 +30,7 @@ public class Day{{dayString}}Puzzle {
     public void part2() {
         System.out.println("Executing Day {{dayString}} Part 2...");
         List<String> lines = AocUtil
-                .readFile("src/main/resources/puzzleInputs/year{{yearString}}/day{{dayString}}Puzzle.txt");
+                .readFile("app/src/main/resources/puzzleInputs/year{{yearString}}/day{{dayString}}Puzzle.txt");
 
         StopWatch stopWatch = StopWatch.createStarted();
         long result = doPart2(lines);

@@ -20,7 +20,7 @@ public class Day{{dayString}}PuzzleTest {
 
     @Test
     public void doPart1_givenExample1_assertNotNull(){
-        List<String> lines = AocUtil.readFile("src/test/resources/year{{yearString}}/day{{dayString}}Example1.txt");
+        List<String> lines = AocUtil.readFile("app/src/test/resources/puzzleInputs/year{{yearString}}/day{{dayString}}Example1.txt");
         assertNotNull(lines);
         assertEquals(0, lines.size());
         assertEquals(-1, day{{dayString}}Puzzle.doPart1(lines)); 
@@ -28,7 +28,7 @@ public class Day{{dayString}}PuzzleTest {
 
     @Test
     public void doPart2_givenChallenge_assertNotNull(){
-        List<String> lines = AocUtil.readFile("src/test/resources/year{{yearString}}/day{{dayString}}Example1.txt");
+        List<String> lines = AocUtil.readFile("app/src/test/resources/puzzleInputs/year{{yearString}}/day{{dayString}}Example1.txt");
         assertNotNull(lines);
         assertEquals(0, lines.size());
         assertEquals(-1, day{{dayString}}Puzzle.doPart2(lines));  
