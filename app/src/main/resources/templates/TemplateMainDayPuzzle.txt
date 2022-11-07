@@ -1,0 +1,46 @@
+package {{projectPath}};
+
+import java.util.List;
+
+import aoc.project.util.AocUtil;
+
+import org.apache.commons.lang3.time.StopWatch;
+
+public class Day{{dayString}}Puzzle {
+    public void part1() {
+        System.out.println("Executing Day {{dayString}} Part 1...");
+        List<String> lines = AocUtil
+                .readFile("src/main/resources/puzzleInputs/year{{yearString}}/day{{dayString}}Puzzle.txt");
+
+        StopWatch stopWatch = StopWatch.createStarted();
+        long result = doPart1(lines);
+        stopWatch.stop();
+
+        System.out.println("  Part 1 result: " + result);
+        System.out.println("  Part 1 completed in " + stopWatch.getTime() + " ms.");
+    }
+
+    public void part2() {
+        System.out.println("Executing Day {{dayString}} Part 2...");
+        List<String> lines = AocUtil
+                .readFile("src/main/resources/puzzleInputs/year{{yearString}}/day{{dayString}}Puzzle.txt");
+
+        StopWatch stopWatch = StopWatch.createStarted();
+        long result = doPart2(lines);
+        stopWatch.stop();
+
+        System.out.println("  Part 2 result: " + result);
+        System.out.println("  Part 2 completed in " + stopWatch.getTime() + " ms.");
+    }
+
+    public long doPart1(List<String> lines) {
+        // Part 1 code goes here
+        return -1;
+    }
+
+    public long doPart2(List<String> lines) {
+        // Part 2 code goes here
+        return -1;
+    }
+
+}
