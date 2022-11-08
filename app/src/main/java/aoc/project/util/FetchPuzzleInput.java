@@ -2,16 +2,11 @@ package aoc.project.util;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
-import java.nio.file.StandardOpenOption;
-
 import org.apache.commons.lang3.StringUtils;
 
 import aoc.project.Constants;
@@ -30,6 +25,14 @@ public class FetchPuzzleInput {
 
         URL url = null;
         HttpURLConnection con = null;
+        Path puzzleInput = Path.of(pathToProject, "app/src/main/resources/puzzleInputs", "year" + year,
+                    "day" + String.format("%02d", day) + "Puzzle.txt");
+
+        if(!Files.exists(puzzleInput)){
+            System.err.println("Puzzle Input file does not exist.  Be sure to run Generate Puzzle Files first.");
+            return false;
+        }
+
         try {
             System.out.println("Fetching Puzzle Input from: " + urlString);
             url = new URL(urlString);
@@ -51,8 +54,7 @@ public class FetchPuzzleInput {
                 inputStream = con.getInputStream();
             }
 
-            Path puzzleInput = Path.of(pathToProject, "app/src/main/resources/puzzleInputs", "year" + year,
-                    "day" + String.format("%02d", day) + "Puzzle.txt");
+            
 
             Files.copy(inputStream, puzzleInput, StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException e) {
