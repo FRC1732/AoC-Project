@@ -46,14 +46,71 @@ public class Day03Puzzle {
 
     public long doPart1(List<String> lines) {
         int count = 0;
+        int total;
         int x =0;
-        for (int y= 0; y < lines.size()-2; y++) {
-            if(lines.get(y).charAt(x)!= '#') {
+        for (int y= 0; y < lines.size(); y++) {
+            if(lines.get(y).charAt(x)== '#') {
+                count++;
+            }
+            x++;
+            if(x>=31) {
+               x = x-31;
+            }
+        }
+        x=0;
+        total = count;
+        count = 0;
+
+        for (int y= 0; y < lines.size(); y++) {
+            if(lines.get(y).charAt(x)== '#') {
                 count++;
             }
             x=x+3;
+            if(x>=31) {
+               x = x-31;
+            }
+        }    
+        x=0;
+        total = total * count;
+        count = 0;    
+
+        for (int y= 0; y < lines.size(); y++) {
+            if(lines.get(y).charAt(x)== '#') {
+                count++;
+            }
+            x=x+5;
+            if(x>=31) {
+               x = x-31;
+            }
+        }  
+        x=0;
+        total = total * count;
+        count = 0;     
+
+         for (int y= 0; y < lines.size(); y++) {
+            if(lines.get(y).charAt(x)== '#') {
+                count++;
+            }
+            x=x+7;
+            if(x>=31) {
+               x = x-31;
+            }
         }
-        return count;
+        x=0;
+        total = total * count;
+        count = 0;
+
+        for (int y= 0; y < lines.size(); y=y+2) {
+            if(lines.get(y).charAt(x)== '#') {
+                count++;
+            }
+            x++;
+            if(x>=31) {
+               x = x-31;
+            }
+        }
+        total = total * count;
+        return total;
     }
 
     public long doPart2(List<String> lines) {
