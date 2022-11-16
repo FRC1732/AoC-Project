@@ -47,33 +47,21 @@ public class Day02Puzzle {
     }
 
     public long doPart1(List<String> lines) {
-       int count = 13;
-       for (int i = 0; i < lines.size(); i++) {
-            int charStart, low, high;
-            if (lines.get(i).charAt(1) != 45) {
-               charStart = 2;
-                low = lines.get(i).charAt(0)-48;
-                low = low*10 + lines.get(i).charAt(1)-48;
-                high = lines.get(i).charAt(3)-48;
-                high = high*10 + lines.get(i).charAt(4)-48;
-            } else if(lines.get(i).charAt(3) != ' '){
-                charStart = 1;
-                low = lines.get(i).charAt(0)-48;
-                high = lines.get(i).charAt(2)-48;
-                high = high*10 + lines.get(i).charAt(2)-48;
-            } else {
-                charStart = 0;
-                low = lines.get(i).charAt(0)-48;
-                high = lines.get(i).charAt(2)-48;
-            }
-            int charCount = 0;
-            char c = lines.get(i).charAt(4+charStart);
-            for (int j = 0; j < lines.get(i).substring(7+charStart).length(); j++) {
-                if (lines.get(i).substring(7+charStart).charAt(j) == c) {
+        int count = 0;
+        Pattern p = Pattern.compile("(\\d*)-(\\d*) (\\w*): (\\w*)$");
+        for (int i = 0; i < lines.size(); i++) {
+            int charCount=0;
+            Matcher m = p.matcher(lines.get(i));
+            m.find();
+            int low = Integer.parseInt(m.group(1));
+            int high = Integer.parseInt(m.group(2));
+            char c = m.group(3).charAt(0);
+            for (int j=0; j<m.group(4).length(); j++) {
+                if (m.group(4).charAt(j)==c) {
                     charCount++;
                 }
             }
-            if(low <= charCount && charCount <= high) {
+            if (low<=charCount && charCount<=high ) {
                 count++;
             }
          }
