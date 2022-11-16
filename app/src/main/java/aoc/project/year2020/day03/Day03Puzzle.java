@@ -45,8 +45,15 @@ public class Day03Puzzle {
     }
 
     public long doPart1(List<String> lines) {
-        // Part 1 code goes here
-        return -1;
+        int count = 0;
+        int x =0;
+        for (int y= 0; y < lines.size()-2; y++) {
+            if(lines.get(y).charAt(x)!= '#') {
+                count++;
+            }
+            x=x+3;
+        }
+        return count;
     }
 
     public long doPart2(List<String> lines) {
