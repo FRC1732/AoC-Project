@@ -1,5 +1,5 @@
-Util.readFile("app/src/test/resources/puzzleInputs/year{{yearString}}/day{{dayString}}Example1.txt");
-        assertNotNull(lines);package {{projectPath}};
+Util.readFile("app/src/test/resources/puzzleInputs/year2020/day01Example1.txt");
+        assertNotNull(lines);package aoc.project.year2020.day01;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -11,27 +11,27 @@ import aoc.project.util.AocUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class Day{{dayString}}PuzzleTest {
-    private Day{{dayString}}Puzzle day{{dayString}}Puzzle;
+public class Day01PuzzleTest {
+    private Day01Puzzle day01Puzzle;
 
     @BeforeEach
     public void setUp(){
-        day{{dayString}}Puzzle = new Day{{dayString}}Puzzle();
+        day01Puzzle = new Day01Puzzle();
     }
 
     @Test
     public void doPart1_givenExample1_assertNotNull(){
         List<String> lines = Aoc
         assertEquals(0, lines.size());
-        assertEquals(-1, day{{dayString}}Puzzle.doPart1(lines)); 
+        assertEquals(-1, day01Puzzle.doPart1(lines)); 
     }
 
     @Test
     public void doPart2_givenChallenge_assertNotNull(){
-        List<String> lines = AocUtil.readFile("app/src/test/resources/puzzleInputs/year{{yearString}}/day{{dayString}}Example1.txt");
+        List<String> lines = AocUtil.readFile("app/src/test/resources/puzzleInputs/year2020/day01Example1.txt");
         assertNotNull(lines);
         assertEquals(0, lines.size());
-        assertEquals(-1, day{{dayString}}Puzzle.doPart2(lines));  
+        assertEquals(-1, day01Puzzle.doPart2(lines));  
     }
 
 }
