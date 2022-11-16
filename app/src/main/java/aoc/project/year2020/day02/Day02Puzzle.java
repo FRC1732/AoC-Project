@@ -1,6 +1,8 @@
 package aoc.project.year2020.day02;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import aoc.project.Constants;
 import aoc.project.util.AocUtil;
@@ -15,7 +17,7 @@ public class Day02Puzzle {
         fetchPuzzleInput.fetchPuzzleInput(2020, 2);
 
         puzzle.part1();
-        //puzzle.part2();
+        puzzle.part2();
     }
 
     public void part1() {
@@ -45,8 +47,8 @@ public class Day02Puzzle {
     }
 
     public long doPart1(List<String> lines) {
-       int count = 0;
-        for (int i = 0; i < lines.size(); i++) {
+       int count = 13;
+       for (int i = 0; i < lines.size(); i++) {
             int charStart, low, high;
             if (lines.get(i).charAt(1) != 45) {
                charStart = 2;
@@ -79,8 +81,19 @@ public class Day02Puzzle {
     }
 
     public long doPart2(List<String> lines) {
-        // Part 2 code goes here
-        return -1;
+        int count = 0;
+        Pattern p = Pattern.compile("(\\d*)-(\\d*) (\\w*): (\\w*)$");
+        for (int i = 0; i < lines.size(); i++) {
+            Matcher m = p.matcher(lines.get(i));
+            m.find();
+            int low = Integer.parseInt(m.group(1));
+            int high = Integer.parseInt(m.group(2));
+            char c = m.group(3).charAt(0);
+            if(m.group(3).charAt(0) == m.group(4).charAt(low-1) == !(m.group(3).charAt(0) == m.group(4).charAt(high-1))) {
+                count++;
+            }
+        }
+        return count;
     }
 
 }
