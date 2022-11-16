@@ -15,7 +15,7 @@ public class Day03Puzzle {
         fetchPuzzleInput.fetchPuzzleInput(2020, 3);
 
         puzzle.part1();
-        //puzzle.part2();
+        puzzle.part2();
     }
 
     public void part1() {
@@ -46,21 +46,7 @@ public class Day03Puzzle {
 
     public long doPart1(List<String> lines) {
         int count = 0;
-        int total;
         int x =0;
-        for (int y= 0; y < lines.size(); y++) {
-            if(lines.get(y).charAt(x)== '#') {
-                count++;
-            }
-            x++;
-            if(x>=31) {
-               x = x-31;
-            }
-        }
-        x=0;
-        total = count;
-        count = 0;
-
         for (int y= 0; y < lines.size(); y++) {
             if(lines.get(y).charAt(x)== '#') {
                 count++;
@@ -69,53 +55,38 @@ public class Day03Puzzle {
             if(x>=31) {
                x = x-31;
             }
-        }    
-        x=0;
-        total = total * count;
-        count = 0;    
-
-        for (int y= 0; y < lines.size(); y++) {
-            if(lines.get(y).charAt(x)== '#') {
-                count++;
-            }
-            x=x+5;
-            if(x>=31) {
-               x = x-31;
-            }
-        }  
-        x=0;
-        total = total * count;
-        count = 0;     
-
-         for (int y= 0; y < lines.size(); y++) {
-            if(lines.get(y).charAt(x)== '#') {
-                count++;
-            }
-            x=x+7;
-            if(x>=31) {
-               x = x-31;
-            }
         }
-        x=0;
-        total = total * count;
-        count = 0;
-
-        for (int y= 0; y < lines.size(); y=y+2) {
-            if(lines.get(y).charAt(x)== '#') {
-                count++;
-            }
-            x++;
-            if(x>=31) {
-               x = x-31;
-            }
-        }
-        total = total * count;
-        return total;
+        return count;
     }
 
     public long doPart2(List<String> lines) {
-        // Part 2 code goes here
-        return -1;
+        int count = 0;
+        int total=0;
+        int x = 0;
+        int[] xV = {1,3,5,7,1};
+        for (int j = 0; j <5; j++) {
+           int  yV = 1;
+            if (j == 5) {
+                yV = 2;
+            }
+            for (int y= 0; y < lines.size(); y = y + yV) {
+              if(lines.get(y).charAt(x)== '#') {
+                   count++;
+                }
+              x = x + xV[j];
+             if(x>=31) {
+                   x = x-31;
+               }
+            }
+            x=0;
+            if (j == 0) {
+                total = count;
+            } else {
+                total = total * count;
+            }
+            count = 0;
+            }
+        return total;
     }
 
 }
