@@ -13,6 +13,7 @@ import org.apache.commons.lang3.time.StopWatch;
 public class Day02Puzzle {
     private final String REGEX = "(\\d*)-(\\d*) (.): (\\w*)";
     private Pattern pattern = Pattern.compile(REGEX);
+
     public static void main(String[] args) {
         Day02Puzzle puzzle = new Day02Puzzle();
         FetchPuzzleInput fetchPuzzleInput = new FetchPuzzleInput(Constants.PATH_TO_PROJECT);
@@ -87,10 +88,10 @@ public class Day02Puzzle {
             int positionTwo = groupTwo;
             char key = groupThree;
             String password = groupFour;
-            if (password.charAt(positionOne-1) == key ^ password.charAt(positionTwo-1) == key) {
+            if (password.charAt(positionOne - 1) == key ^ password.charAt(positionTwo - 1) == key) {
                 valid++;
             }
-        }        
+        }
         return valid;
     }
 

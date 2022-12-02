@@ -1,5 +1,8 @@
-package aoc.project.year2020.day01;
+package aoc.project.year2022.day01;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -7,22 +10,23 @@ import aoc.project.Constants;
 import aoc.project.util.AocUtil;
 import aoc.project.util.FetchPuzzleInput;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.StopWatch;
 
 public class Day01Puzzle {
     public static void main(String[] args) {
         Day01Puzzle puzzle = new Day01Puzzle();
         FetchPuzzleInput fetchPuzzleInput = new FetchPuzzleInput(Constants.PATH_TO_PROJECT);
-        fetchPuzzleInput.fetchPuzzleInput(2020, 1);
+        fetchPuzzleInput.fetchPuzzleInput(2022, 1);
 
         puzzle.part1();
-        puzzle.part2();
+        // puzzle.part2();
     }
 
     public void part1() {
         System.out.println("Executing Day 01 Part 1...");
         List<String> lines = AocUtil
-                .readFile("app/src/main/resources/puzzleInputs/year2020/day01Puzzle.txt");
+                .readFile("app/src/main/resources/puzzleInputs/year2022/day01Puzzle.txt");
 
         StopWatch stopWatch = StopWatch.createStarted();
         long result = doPart1(lines);
@@ -35,7 +39,7 @@ public class Day01Puzzle {
     public void part2() {
         System.out.println("Executing Day 01 Part 2...");
         List<String> lines = AocUtil
-                .readFile("app/src/main/resources/puzzleInputs/year2020/day01Puzzle.txt");
+                .readFile("app/src/main/resources/puzzleInputs/year2022/day01Puzzle.txt");
 
         StopWatch stopWatch = StopWatch.createStarted();
         long result = doPart2(lines);
@@ -46,33 +50,26 @@ public class Day01Puzzle {
     }
 
     public long doPart1(List<String> lines) {
-        List<Integer> numbers = lines.stream().map(s -> Integer.parseInt(s)).collect(Collectors.toList());
-        for (int i = 0; i < numbers.size() - 1; i++) {
-            int numOne = numbers.get(i);
-            for (int j = i + 1; j < numbers.size(); j++) {
-                int numTwo = numbers.get(j);
-                if (numOne + numTwo == 2020) {
-                    return numOne * numTwo;
-                }
+        List<Integer> sums = new ArrayList<>();
+        int highestCal = 0;
+        int sum = 0;
+        for (int i = 0; i < lines.size(); i++) {
+            String line = lines.get(i);
+            if (StringUtils.isBlank(line)) {
+                sums.add(sum);
+                sum = 0;
+                continue;
             }
+            sum += Integer.parseInt(line);
         }
-        return -1;
+        Collections.sort(sums);
+        Collections.reverse(sums);
+        highestCal = sums.get(0);
+        return highestCal;
     }
 
     public long doPart2(List<String> lines) {
-        List<Integer> numbers = lines.stream().map(s -> Integer.parseInt(s)).collect(Collectors.toList());
-        for (int i = 0; i < numbers.size() - 2; i++) {
-            int numOne = numbers.get(i);
-            for (int j = i + 1; j < numbers.size() - 1; j++) {
-                int numTwo = numbers.get(j);
-                for (int k = j + 1; k < numbers.size(); k++) {
-                    int numThree = numbers.get(k);
-                    if (numOne + numTwo + numThree == 2020) {
-                        return numOne * numTwo * numThree;
-                    }
-                }
-            }
-        }
+        // Part 2 code goes here
         return -1;
     }
 
