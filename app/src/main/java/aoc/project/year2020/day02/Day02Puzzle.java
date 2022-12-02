@@ -76,7 +76,6 @@ public class Day02Puzzle {
             m.find();
             int low = Integer.parseInt(m.group(1));
             int high = Integer.parseInt(m.group(2));
-            char c = m.group(3).charAt(0);
             if(m.group(3).charAt(0) == m.group(4).charAt(low-1) == !(m.group(3).charAt(0) == m.group(4).charAt(high-1))) {
                 count++;
             }
