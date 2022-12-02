@@ -1,6 +1,8 @@
 package aoc.project.year2022.day01;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import aoc.project.Constants;
@@ -58,13 +60,9 @@ public class Day01Puzzle {
             calories.set(count, calories.get(count) + Integer.parseInt(lines.get(i)));
             }
         }
-        int largest = calories.get(0);
-        for (int i = 1; i < calories.size(); i++) {
-            if (calories.get(i) > largest) {
-                largest = calories.get(i);
-            }
-        }
-        return largest;
+        Collections.sort(calories);
+        Collections.reverse(calories);
+        return calories.get(0);
     }
 
     public long doPart2(List<String> lines) {
@@ -79,21 +77,10 @@ public class Day01Puzzle {
             calories.set(count, calories.get(count) + Integer.parseInt(lines.get(i)));
             }
         }
-        return searchAndRemove(calories) + searchAndRemove(calories) + searchAndRemove(calories);
+        Collections.sort(calories);
+        Collections.reverse(calories);
+        return calories.get(0)+calories.get(1)+calories.get(2);
         
-    }
-
-    public int searchAndRemove(List<Integer> calories) {
-        int firstLargest = calories.get(0);
-        int largestIndex = 0;
-        for (int i = 1; i < calories.size(); i++) {
-            if (calories.get(i) > firstLargest) {
-                firstLargest = calories.get(i);
-                largestIndex = i;
-            }
-        }
-        calories.remove(largestIndex);
-        return firstLargest;
     }
 
 }
