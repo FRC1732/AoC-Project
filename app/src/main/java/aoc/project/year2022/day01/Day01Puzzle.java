@@ -80,7 +80,6 @@ public class Day01Puzzle {
         Collections.sort(calories);
         Collections.reverse(calories);
         return calories.get(0)+calories.get(1)+calories.get(2);
-        
     }
 
 }
