@@ -45,8 +45,25 @@ public class Day03Puzzle {
     }
 
     public long doPart1(List<String> lines) {
-        // Part 1 code goes here
-        return -1;
+        int sum = 0;
+        for (int i = 1; i < 2; i++) {
+            String upper = lines.get(i).substring(0, lines.get(i).length()/2);
+            String lower = lines.get(i).substring(lines.get(i).length()/2);
+            for (int j = 0; j < upper.length(); j++) {
+                for (int k = 0; k < upper.length(); k++) {
+                    if (lower.charAt(k) == upper.charAt(j)) {
+                        if (upper.charAt(j) < 95) {
+                            sum += upper.charAt(j)-38;
+                            System.out.println(lower.charAt(k) + " " + sum + " " + upper.charAt(j));
+                        } else {
+                            sum += upper.charAt(j) - 96;
+                            System.out.println(lower.charAt(k) + " " + sum + " " + upper.charAt(j));
+                        }
+                    }
+                }
+            }
+        }
+        return sum;
     }
 
     public long doPart2(List<String> lines) {
