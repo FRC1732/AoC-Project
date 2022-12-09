@@ -20,7 +20,7 @@ public class Day01Puzzle {
         fetchPuzzleInput.fetchPuzzleInput(2022, 1);
 
         puzzle.part1();
-        // puzzle.part2();
+        puzzle.part2();
     }
 
     public void part1() {
@@ -69,8 +69,23 @@ public class Day01Puzzle {
     }
 
     public long doPart2(List<String> lines) {
-        // Part 2 code goes here
-        return -1;
+        List<Integer> sums = new ArrayList<>();
+        int topThree = 0;
+        int sum = 0;
+        for (int i = 0; i < lines.size(); i++) {
+            String line = lines.get(i);
+            if (StringUtils.isBlank(line)) {
+                sums.add(sum);
+                sum = 0;
+                continue;
+            }
+            sum += Integer.parseInt(line);
+        }
+        sums.add(sum);
+        Collections.sort(sums);
+        Collections.reverse(sums);
+        topThree = sums.get(0) + sums.get(1) + sums.get(2);
+        return topThree;
     }
 
 }
