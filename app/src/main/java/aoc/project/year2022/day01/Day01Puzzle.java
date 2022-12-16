@@ -1,7 +1,6 @@
 package aoc.project.year2022.day01;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 

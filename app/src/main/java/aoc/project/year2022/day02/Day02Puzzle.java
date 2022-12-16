@@ -46,26 +46,26 @@ public class Day02Puzzle {
 
     public long doPart1(List<String> lines) {
         int score = 0;
-        for(int i = 0; i < lines.size(); i++) {
+        for (int i = 0; i < lines.size(); i++) {
             String[] split = lines.get(i).split(" ");
-            split[1] = Character.toString((char)(split[1].charAt(0)-23));
-            score += split[1].charAt(0)-64;
-            if(split[1].equals(split[0])){
+            split[1] = Character.toString((char) (split[1].charAt(0) - 23));
+            score += split[1].charAt(0) - 64;
+            if (split[1].equals(split[0])) {
                 score += 3;
-            } else if (split[0].charAt(0)-split[1].charAt(0) == -1 || split[0].charAt(0)-split[1].charAt(0) == 2){
+            } else if (split[0].charAt(0) - split[1].charAt(0) == -1 || split[0].charAt(0) - split[1].charAt(0) == 2) {
                 score += 6;
-            } 
+            }
         }
         return score;
     }
 
     public long doPart2(List<String> lines) {
         int score = 0;
-        for(int i = 0; i < lines.size(); i++) {
+        for (int i = 0; i < lines.size(); i++) {
             String[] split = lines.get(i).split(" ");
-            if(split[1].equals("X")) {
+            if (split[1].equals("X")) {
                 score += 0;
-            } else if(split[1].equals("Y")) {
+            } else if (split[1].equals("Y")) {
                 score += 3;
             } else {
                 score += 6;
@@ -96,7 +96,7 @@ public class Day02Puzzle {
                 }
             }
         }
-            return score;
+        return score;
     }
 
 }

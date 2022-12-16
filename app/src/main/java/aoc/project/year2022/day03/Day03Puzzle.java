@@ -1,5 +1,8 @@
 package aoc.project.year2022.day03;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 import aoc.project.Constants;
@@ -15,7 +18,7 @@ public class Day03Puzzle {
         fetchPuzzleInput.fetchPuzzleInput(2022, 3);
 
         puzzle.part1();
-        //puzzle.part2();
+        puzzle.part2();
     }
 
     public void part1() {
@@ -46,7 +49,9 @@ public class Day03Puzzle {
 
     public long doPart1(List<String> lines) {
         int sum = 0;
-        for (int i = 1; i < 2; i++) {
+        
+        for (int i = 0; i < lines.size(); i++) {
+            boolean breaks = false;
             String upper = lines.get(i).substring(0, lines.get(i).length()/2);
             String lower = lines.get(i).substring(lines.get(i).length()/2);
             for (int j = 0; j < upper.length(); j++) {
@@ -54,12 +59,18 @@ public class Day03Puzzle {
                     if (lower.charAt(k) == upper.charAt(j)) {
                         if (upper.charAt(j) < 95) {
                             sum += upper.charAt(j)-38;
-                            System.out.println(lower.charAt(k) + " " + sum + " " + upper.charAt(j));
                         } else {
                             sum += upper.charAt(j) - 96;
-                            System.out.println(lower.charAt(k) + " " + sum + " " + upper.charAt(j));
                         }
+                        breaks = true;
+                        break;
                     }
+                    if (breaks) {
+                        break;
+                    }
+                }
+                if (breaks) {
+                    break;
                 }
             }
         }
@@ -67,8 +78,42 @@ public class Day03Puzzle {
     }
 
     public long doPart2(List<String> lines) {
-        // Part 2 code goes here
-        return -1;
+        int sum = 0;
+        ArrayList<String[]> groups = new ArrayList<String[]>();
+        for (int i = 0; i < lines.size(); i += 3) {
+            String[] strs = {lines.get(i), lines.get(i+1), lines.get(i+2)};
+            groups.add(strs);
+        }
+        for(int i = 0; i < groups.size(); i++) {
+            Arrays.sort(groups.get(i), Comparator.comparing(String::length));
+            boolean done = false;
+            char c = '.';
+            for(int k = 0; k < groups.get(i)[0].length(); k++) {
+                for (int j = 0; j < groups.get(i)[1].length(); j++) {
+                    if (groups.get(i)[0].charAt(k) == groups.get(i)[1].charAt(j)) {
+                        for(int l = 0; l < groups.get(i)[2].length(); l++) {
+                            if (groups.get(i)[0].charAt(k) == groups.get(i)[2].charAt(l)) {
+                                done = true;
+                                c = groups.get(i)[0].charAt(k);
+                                break;
+                            }
+                        }
+                    }
+                    if(done) {
+                        break;
+                    }
+                }
+                if (done) {
+                    break;
+                }
+            }
+            if (c < 95) {
+                sum += c-38;
+            } else {
+                sum += c-96;
+            } 
+        }
+        return sum;
     }
 
 }

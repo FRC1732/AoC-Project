@@ -30,8 +30,8 @@ public class Day03PuzzleTest {
     public void doPart2_givenChallenge_assertNotNull(){
         List<String> lines = AocUtil.readFile("app/src/test/resources/puzzleInputs/year2022/day03Example1.txt");
         assertNotNull(lines);
-        assertEquals(0, lines.size());
-        assertEquals(-1, day03Puzzle.doPart2(lines));  
+        assertEquals(6, lines.size());
+        assertEquals(70, day03Puzzle.doPart2(lines));  
     }
 
 }
