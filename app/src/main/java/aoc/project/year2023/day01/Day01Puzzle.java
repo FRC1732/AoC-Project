@@ -1,5 +1,6 @@
 package aoc.project.year2023.day01;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import aoc.project.Constants;
@@ -15,7 +16,7 @@ public class Day01Puzzle {
         fetchPuzzleInput.fetchPuzzleInput(2023, 1);
 
         puzzle.part1();
-        //puzzle.part2();
+        puzzle.part2();
     }
 
     public void part1() {
@@ -45,13 +46,42 @@ public class Day01Puzzle {
     }
 
     public long doPart1(List<String> lines) {
-        // Part 1 code goes here
-        return -1;
+        int result = 0;
+        for (int i = 0; i < lines.size(); i++) {
+            String current = lines.get(i);
+            LinkedList<Integer> nums = new LinkedList<Integer>();
+            for(int j = 0; j < current.length(); j++) {
+                if(Character.isDigit(current.charAt(j))) {
+                    nums.add(Character.getNumericValue(current.charAt(j)));
+                }
+            }
+            result += nums.getFirst()*10 + nums.getLast();
+        }
+        return result;
     }
 
     public long doPart2(List<String> lines) {
-        // Part 2 code goes here
-        return -1;
+        int result = 0;
+        String[] ints = {"", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"};
+        for(int i = 0; i < lines.size(); i++) {
+            String current = lines.get(i).toLowerCase();
+            LinkedList<Integer> nums = new LinkedList<Integer>();
+            for(int j = 0; j < current.length(); j++) {
+                if(Character.isDigit(current.charAt(j))) {
+                    nums.add(Character.getNumericValue(current.charAt(j)));
+                } else {
+                    for(int r = 1; r < 10; r++) {
+                        if(current.substring(j).length() >= ints[r].length() && current.substring(j, j + ints[r].length()).equals(ints[r])) {
+                            nums.add(r);
+                        }
+                    }
+                }
+            }
+            System.out.println(nums.getFirst()*10 + nums.getLast());
+            result += nums.getFirst()*10 + nums.getLast();
+        }
+        return result;
     }
-
 }
+
+
