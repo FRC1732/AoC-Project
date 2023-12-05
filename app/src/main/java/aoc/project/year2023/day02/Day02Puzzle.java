@@ -15,7 +15,7 @@ public class Day02Puzzle {
         fetchPuzzleInput.fetchPuzzleInput(2023, 2);
 
         puzzle.part1();
-        //puzzle.part2();
+        puzzle.part2();
     }
 
     public void part1() {
@@ -47,7 +47,7 @@ public class Day02Puzzle {
     public long doPart1(List<String> lines) {
         int result = 0;
         String[] colors = {"red", "green", "blue"};
-        for(int i = 0; i < lines.size(); i++) {
+        for(int i = 0; i < lines.size(); i++) { //TODO: fix bounds
             boolean working = true;
             boolean possible = true;
             int[] cubeColors = {0,0,0}; //red, green, blue   
@@ -61,19 +61,17 @@ public class Day02Puzzle {
                     numCubes = numCubes*10 + Character.getNumericValue(current.charAt(0));
                 }
                 current = current.substring(2);
-                if(current.indexOf(";") < 7 && current.indexOf(";") > 0 ) {
+                if(current.indexOf(";") < 10 && current.indexOf(";") > 0 ) {
                     boolean searching = true;
                     for(int j = 0; j < colors.length && searching; j++) {
                         if(current.substring(0, current.indexOf(";")).equals(colors[j])) {
                             cubeColors[j] += numCubes;
                             current = current.substring(current.indexOf(";")+2);
                             searching = false;
-                            System.out.println(colors[j]+ ": " + cubeColors[j] + "semicolon");
                         }
                     }
-                    if (cubeColors[0] > 12 || cubeColors[1] > 13 || cubeColors[2] > 13) {
+                    if (cubeColors[0] > 12 || cubeColors[1] > 13 || cubeColors[2] > 14) {
                         possible = false;
-                        break;
                     }
                     cubeColors[0] = 0;
                     cubeColors[1] = 0;
@@ -85,24 +83,20 @@ public class Day02Puzzle {
                             cubeColors[j] += numCubes;
                             current = current.substring(current.indexOf(", ") + 2);
                             searching = false; 
-                                                        System.out.println(colors[j]+ ": " + cubeColors[j]);
-
                         }
                     }
                 } else {
                     for(int j = 0; j < colors.length; j++) {
                         if(current.equals(colors[j])) {
                             cubeColors[j] += numCubes;
-                                                        System.out.println(colors[j]+ ": " + cubeColors[j]);
                         }
                     }
-                    if (cubeColors[0] > 12 || cubeColors[1] > 13 || cubeColors[2] > 13) {
+                    if (cubeColors[0] > 12 || cubeColors[1] > 13 || cubeColors[2] > 14) {
                         possible = false;
                     }
                     working = false;
                 }
             }
-            System.out.println(possible);
             if(possible) {
                 result += id;
             }
@@ -111,8 +105,72 @@ public class Day02Puzzle {
     }
 
     public long doPart2(List<String> lines) {
-        // Part 2 code goes here
-        return -1;
+        int result = 0;
+        String[] colors = {"red", "green", "blue"};
+        for(int i = 0; i < lines.size(); i++) {
+            boolean working = true;
+            int[] numColors = {0,0,0};
+            int[] cubeColors = {0,0,0}; //red, green, blue   
+            String current = lines.get(i);
+            current = current.substring(current.indexOf(":") + 2);
+            while (working) {
+                int numCubes = Character.getNumericValue(current.charAt(0));
+                if(Character.isDigit(current.charAt(1))) {
+                    current = current.substring(1);
+                    numCubes = numCubes*10 + Character.getNumericValue(current.charAt(0));
+                }
+                current = current.substring(2);
+                if(current.indexOf(";") < 10 && current.indexOf(";") > 0 ) {
+                    boolean searching = true;
+                    for(int j = 0; j < colors.length && searching; j++) {
+                        if(current.substring(0, current.indexOf(";")).equals(colors[j])) {
+                            cubeColors[j] += numCubes;
+                            current = current.substring(current.indexOf(";")+2);
+                            searching = false;
+                        }
+                    }
+                    if(numColors[0] < cubeColors[0]) {
+                        numColors[0] = cubeColors[0];
+                    }
+                    if(numColors[1] < cubeColors[1]) {
+                        numColors[1] = cubeColors[1];
+                    }
+                    if(numColors[2] < cubeColors[2]) {
+                        numColors[2] = cubeColors[2];
+                    }
+                    cubeColors[0] = 0;
+                    cubeColors[1] = 0;
+                    cubeColors[2] = 0;
+                } else if (current.indexOf(",") > -1){
+                    boolean searching = true;
+                    for(int j = 0; j < colors.length && searching; j++) {
+                        if(current.substring(0, current.indexOf(",")).equals(colors[j])) {
+                            cubeColors[j] += numCubes;
+                            current = current.substring(current.indexOf(", ") + 2);
+                            searching = false; 
+                        }
+                    }
+                } else {
+                    for(int j = 0; j < colors.length; j++) {
+                        if(current.equals(colors[j])) {
+                            cubeColors[j] += numCubes;
+                        }
+                    }
+                    working = false;
+                    if(numColors[0] < cubeColors[0]) {
+                        numColors[0] = cubeColors[0];
+                    }
+                    if(numColors[1] < cubeColors[1]) {
+                        numColors[1] = cubeColors[1];
+                    }
+                    if(numColors[2] < cubeColors[2]) {
+                        numColors[2] = cubeColors[2];
+                    }
+                }
+            }
+            result += numColors[0]*numColors[1]*numColors[2];
+        }
+        return result;
     }
 
 }
