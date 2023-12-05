@@ -77,7 +77,6 @@ public class Day01Puzzle {
                     }
                 }
             }
-            System.out.println(nums.getFirst()*10 + nums.getLast());
             result += nums.getFirst()*10 + nums.getLast();
         }
         return result;
