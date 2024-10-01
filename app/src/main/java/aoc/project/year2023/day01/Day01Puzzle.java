@@ -1,6 +1,5 @@
 package aoc.project.year2023.day01;
 
-import java.nio.charset.spi.CharsetProvider;
 import java.util.List;
 
 import aoc.project.Constants;

@@ -5,8 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.util.List;
 
-import javax.sound.sampled.LineEvent;
-
 import aoc.project.util.AocUtil;
 
 import org.junit.jupiter.api.BeforeEach;

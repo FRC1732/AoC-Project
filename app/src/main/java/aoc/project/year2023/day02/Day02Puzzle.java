@@ -7,7 +7,6 @@ import aoc.project.util.AocUtil;
 import aoc.project.util.FetchPuzzleInput;
 
 import org.apache.commons.lang3.time.StopWatch;
-import org.checkerframework.checker.units.qual.s;
 
 public class Day02Puzzle {
     public static void main(String[] args) {
@@ -99,7 +98,6 @@ public class Day02Puzzle {
 
         for (int i = 0; i < lines.size(); i++) {
             String line = lines.get(i);
-            int gameId = i + 1;
 
             int maxRed = 0;
             int maxBlue = 0;
