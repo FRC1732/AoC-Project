@@ -1,8 +1,6 @@
 package aoc.project.year2023.day06;
 
 import java.util.ArrayList;
-import java.util.Dictionary;
-import java.util.Hashtable;
 import java.util.List;
 
 import aoc.project.Constants;

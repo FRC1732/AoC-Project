@@ -1,12 +1,7 @@
 package aoc.project.year2023.day05;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-import java.util.function.LongConsumer;
-import java.util.function.LongSupplier;
-
 import aoc.project.Constants;
 import aoc.project.util.AocUtil;
 import aoc.project.util.FetchPuzzleInput;
