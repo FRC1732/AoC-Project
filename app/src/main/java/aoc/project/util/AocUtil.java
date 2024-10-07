@@ -6,8 +6,6 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.checkerframework.common.reflection.qual.NewInstance;
-
 import aoc.project.Constants;
 
 public class AocUtil {
@@ -37,6 +35,20 @@ public class AocUtil {
         }
 
         return Double.parseDouble(parseFrom.substring(newStart, newEnd + 1));
+    }
+
+    public static long parseNumberLong(String parseFrom, int startingPoint) {
+        int newStart = startingPoint;
+        while (newStart - 1 >= 0 && Character.isDigit(parseFrom.charAt(newStart - 1))) {
+            newStart--;
+        }
+
+        int newEnd = startingPoint;
+        while (newEnd + 1 < parseFrom.length() && Character.isDigit(parseFrom.charAt(newEnd + 1))) {
+            newEnd++;
+        }
+
+        return Long.parseLong(parseFrom.substring(newStart, newEnd + 1));
     }
 
     public static int parseNumberInt(String parseFrom, int startingPoint) {

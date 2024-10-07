@@ -7,7 +7,6 @@ import aoc.project.util.AocUtil;
 import aoc.project.util.FetchPuzzleInput;
 
 import org.apache.commons.lang3.time.StopWatch;
-import org.w3c.dom.stylesheets.LinkStyle;
 
 public class Day04Puzzle {
     public static void main(String[] args) {
