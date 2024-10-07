@@ -259,7 +259,6 @@ public class Day05Puzzle {
             System.out.println("FINAL: " + seed.getStart() + "-" + seed.getEnd());
         });
 
-
         Long lowestLocationNumber = Long.MAX_VALUE;
 
         for (int i = 0; i < seeds.size(); i++) {
