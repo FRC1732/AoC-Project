@@ -1,21 +1,13 @@
 package aoc.project.year2023.day07;
 
-import java.time.temporal.ValueRange;
-import java.util.ArrayList;
+// import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
-import java.util.function.IntSupplier;
-import java.util.function.LongSupplier;
-
-import javax.lang.model.util.ElementScanner14;
-
 import aoc.project.Constants;
 import aoc.project.util.AocUtil;
 import aoc.project.util.FetchPuzzleInput;
 
 import org.apache.commons.lang3.time.StopWatch;
-
-import com.google.common.collect.MapDifference.ValueDifference;
 
 public class Day07Puzzle {
 
@@ -211,7 +203,7 @@ public class Day07Puzzle {
 
     public long doPart1(List<String> lines) {
         // Part 1 code goes here
-        List<Integer> cards = new ArrayList<>();
+        // List<Integer> cards = new ArrayList<>();
 
         lines.sort((card, card2) -> {
             int powerDifference = getCardsPower(card, false) - getCardsPower(card2, false);
@@ -237,7 +229,7 @@ public class Day07Puzzle {
 
     public long doPart2(List<String> lines) {
         // Part 1 code goes here
-        List<Integer> cards = new ArrayList<>();
+        // List<Integer> cards = new ArrayList<>();
 
         lines.sort((card, card2) -> {
             int powerDifference = getCardsPower(card, true) - getCardsPower(card2, true);

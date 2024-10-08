@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
 
-import javax.print.StreamPrintService;
-
 import aoc.project.Constants;
 import aoc.project.util.AocUtil;
 import aoc.project.util.FetchPuzzleInput;
@@ -193,6 +191,7 @@ public class Day08Puzzle {
 
         // get the factors
 
+        @SuppressWarnings({ "unchecked", "rawtypes" })
         Hashtable<Long, Long> commonFactors = new Hashtable();
         for (int i = 0; i < stepsPerPath.size(); i++) {
             long stepLength = stepsPerPath.get(i);

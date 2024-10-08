@@ -39,7 +39,7 @@ public class AocUtil {
 
     public static long parseNumberLong(String parseFrom, int startingPoint) {
         int newStart = startingPoint;
-        while (newStart - 1 >= 0 && Character.isDigit(parseFrom.charAt(newStart - 1))) {
+        while (newStart - 1 >= 0 && (Character.isDigit(parseFrom.charAt(newStart - 1)) || parseFrom.charAt(newStart - 1) == '-')) {
             newStart--;
         }
 
