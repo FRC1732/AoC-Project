@@ -23,15 +23,15 @@ public class Day10PuzzleTest {
         List<String> lines = AocUtil.readFile("app/src/test/resources/puzzleInputs/year2023/day10Example1.txt");
         assertNotNull(lines);
         assertEquals(5, lines.size());
-        assertEquals(8, day10Puzzle.doPart1(lines)); 
+        assertEquals(4, day10Puzzle.doPart1(lines)); 
     }
 
     @Test
     public void doPart2_givenChallenge_assertNotNull(){
         List<String> lines = AocUtil.readFile("app/src/test/resources/puzzleInputs/year2023/day10Example1.txt");
         assertNotNull(lines);
-        assertEquals(0, lines.size());
-        assertEquals(-1, day10Puzzle.doPart2(lines));  
+        assertEquals(10, lines.size());
+        assertEquals(8, day10Puzzle.doPart2(lines));  
     }
 
 }
