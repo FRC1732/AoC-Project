@@ -20,7 +20,7 @@ public class GeneratePuzzleFilesTest {
 
     @Test
     public void generateFiles_givenPathYearAndDay_generateNewFilesIfNoneExist(){
-        generatePuzzleFiles.generateFiles(Constants.AOC_YEAR, 10);
+        generatePuzzleFiles.generateFiles(Constants.AOC_YEAR, 11);
 
         assertTrue(true, "Nothing to see here.");
     }

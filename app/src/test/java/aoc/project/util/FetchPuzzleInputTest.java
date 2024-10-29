@@ -20,7 +20,7 @@ public class FetchPuzzleInputTest {
 
     @Test
     public void generateFiles_givenPathYearAndDay_generateNewFilesIfNoneExist(){
-        fetchPuzzleInput.fetchPuzzleInput(Constants.AOC_YEAR, 10);
+        fetchPuzzleInput.fetchPuzzleInput(Constants.AOC_YEAR, 11);
 
         assertTrue(true, "Nothing to see here.");
     }
