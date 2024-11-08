@@ -1,7 +1,5 @@
 package aoc.project.year2023.day09;
 
-import java.sql.Time;
-import java.time.Clock;
 import java.util.ArrayList;
 import java.util.List;
 

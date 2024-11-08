@@ -1,10 +1,7 @@
 package aoc.project.year2023.day10;
 
-import java.nio.channels.Pipe;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.swing.plaf.synth.SynthSeparatorUI;
 
 import aoc.project.Constants;
 import aoc.project.util.AocUtil;

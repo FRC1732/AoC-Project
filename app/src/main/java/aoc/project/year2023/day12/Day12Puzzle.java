@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
 
-import javax.print.DocFlavor.READER;
-import javax.swing.Spring;
-
 import aoc.project.Constants;
 import aoc.project.util.AocUtil;
 import aoc.project.util.FetchPuzzleInput;

@@ -10,8 +10,6 @@ import aoc.project.util.FetchPuzzleInput;
 
 import org.apache.commons.lang3.time.StopWatch;
 
-import com.google.common.math.LinearTransformation;
-
 public class Day11Puzzle {
     public static void main(String[] args) {
         Day11Puzzle puzzle = new Day11Puzzle();

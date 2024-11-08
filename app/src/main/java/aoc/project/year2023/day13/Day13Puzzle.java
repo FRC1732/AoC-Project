@@ -6,7 +6,7 @@ import java.util.List;
 import aoc.project.Constants;
 import aoc.project.util.AocUtil;
 import aoc.project.util.FetchPuzzleInput;
-import aoc.project.year2023.day13.Day13Puzzle.TileType;
+// import aoc.project.year2023.day13.Day13Puzzle.TileType;
 
 import org.apache.commons.lang3.time.StopWatch;
 
