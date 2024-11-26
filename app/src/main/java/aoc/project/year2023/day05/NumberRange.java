@@ -66,4 +66,8 @@ public class NumberRange {
     public NumberRange getIntersection(NumberRange secondRange) {
         return new NumberRange(Math.max(startOfRange, secondRange.getStart()), Math.min(endOfRange, secondRange.getEnd()));
     }
+
+    public long getLength() {
+        return endOfRange - startOfRange;
+    }
 }

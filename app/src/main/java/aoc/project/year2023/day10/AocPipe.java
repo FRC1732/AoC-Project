@@ -310,7 +310,6 @@ public class AocPipe {
 
         for (int outer = 0; outer <= 2; outer++) {
             for (int inner = 0; inner <= 2; inner++) {
-                // System.err.println(connectionGrid[outer][inner]);
                 if (connectionGrid[outer][inner] != ConnectionType.INVALID) {
                     connections.add(getPipeFromLocalCords(outer, inner));
                 }
