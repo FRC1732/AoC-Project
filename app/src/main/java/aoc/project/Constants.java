@@ -8,5 +8,5 @@ public class Constants {
     public final static String SESSION_ID = "session=53616c7465645f5f029f8948e0ae3a2e2b08f7ac19479c7584369baec99ee3a6d01a40680f37347168cb32adeffea87e07fbadde2e4d42943ab10e12c8a88272";
 
     // This does change often so made it a constant
-    public final static int AOC_YEAR = 2023;
+    public final static int AOC_YEAR = 2024;
 }
