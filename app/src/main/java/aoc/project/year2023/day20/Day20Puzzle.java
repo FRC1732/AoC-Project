@@ -55,6 +55,16 @@ public class Day20Puzzle {
         System.out.println("  Part 2 completed in " + stopWatch.getTime() + " ms.");
     }
 
+    public boolean inList(String[] search, String label) {
+        for (String element : search) {
+            if (element.equals(label)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     record Signal(RadioModule sender, String[] toSend, boolean high) {
 
     }
@@ -105,6 +115,10 @@ public class Day20Puzzle {
         public String getLabel() {
             return label;
         }
+
+        public void reset() {
+            
+        }
     }
 
     class FlipflopModule extends RadioModule {
@@ -134,23 +148,21 @@ public class Day20Puzzle {
             inputs = new HashMap<>();
         }
 
-        public boolean inList(String[] search) {
-            for (String element : search) {
-                if (element.equals(label)) {
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
         public void fetchInputs() {
             for (Entry<String, RadioModule> entry : radioMap.entrySet()) {
                 RadioModule module = entry.getValue();
-                if (inList(module.getSendTo())) {
+                if (inList(module.getSendTo(), label)) {
                     inputs.put(module, false);
                 }
             }
+        }
+
+        public ArrayList<RadioModule> getInputs() {
+            ArrayList<RadioModule> returnInputs = new ArrayList<>();
+            for (Entry<RadioModule, Boolean> entry : inputs.entrySet()) {
+                returnInputs.add(entry.getKey());
+            }
+            return returnInputs;
         }
 
         @Override
@@ -254,6 +266,51 @@ public class Day20Puzzle {
         return highSignals * lowSingals;
     }
 
+    public void resetRadios() {
+        for (Entry<String, RadioModule> entry : radioMap.entrySet()) {
+            RadioModule module = entry.getValue();
+            module.reset();
+        }
+    }
+
+    public long bruteForceActivationTime(RadioModule radio, RadioModule button, String[] broadcastList) {
+        if (radio.getClass().equals(Broadcaster.class)) {
+            return 1;
+        }
+        long count = 0;
+
+        boolean done = false;
+
+        while (!done) {
+            count++;
+            queSignal(new Signal(button, broadcastList, false));
+
+            while (signalQue.size() > 0) {
+                Signal toSend = signalQue.remove(0);
+                sendSignal(toSend);
+                if (inList(toSend.toSend(), radio.getLabel())) {
+                    done = true;
+                    break;
+                }
+            }
+        }
+        resetRadios();
+
+        return count;
+    }
+
+    public long recurseRadio(Conjunction toCheck, RadioModule button, String[] broadcastList) {
+        long multiple = 1;
+        for (RadioModule radio : toCheck.getInputs()) {
+            if (radio.getClass().equals(Conjunction.class)) {
+                multiple *= recurseRadio((Conjunction) radio, button, broadcastList);
+            } else {
+                multiple *= bruteForceActivationTime(radio, button, broadcastList);
+            }
+        }
+        return multiple;
+    }
+
     public long doPart2(List<String> lines) {
         // Part 1 code goes here
         radioMap = new HashMap<>();
@@ -262,7 +319,7 @@ public class Day20Puzzle {
         highSignals = 0;
 
         Broadcaster broadcaster = new Broadcaster(null, null); // placeholder values
-        
+
         for (String module : lines) {
             RadioModule createdModule;
 
@@ -295,30 +352,25 @@ public class Day20Puzzle {
             radioMap.put(label, createdModule);
         }
 
-        for (Entry<String, RadioModule> entry : radioMap.entrySet()) {
-            if (entry.getValue().getClass().hashCode() == Conjunction.class.hashCode()) {
-                Conjunction conjunctionModule = (Conjunction) entry.getValue();
-                conjunctionModule.fetchInputs();
-            }
-        }
-
         String[] broadcastList = { broadcaster.getLabel() };
         RadioModule button = new RadioModule(broadcastList, "button");
         radioMap.put("button", button);
 
-        int buttonPresses = 0;
-        while (!rxReceivedSignal) {
-            buttonPresses++;
-            queSignal(new Signal(button, broadcastList, false));
+        Conjunction finalConjuction = new Conjunction(broadcastList, null); // placeholder
+        for (Entry<String, RadioModule> entry : radioMap.entrySet()) {
+            if (entry.getValue().getClass().hashCode() == Conjunction.class.hashCode()) {
+                Conjunction conjunctionModule = (Conjunction) entry.getValue();
+                conjunctionModule.fetchInputs();
 
-            while (signalQue.size() > 0) {
-                sendSignal(signalQue.remove(0));
+                if (inList(conjunctionModule.getSendTo(), "rx")) {
+                    finalConjuction = conjunctionModule;
+                }
             }
         }
 
         // System.out.println("high: " + highSignals);
         // System.out.println("low: " + lowSingals);
-        return highSignals * lowSingals;
+        return recurseRadio(finalConjuction, button, broadcastList);
     }
 
 }
