@@ -138,6 +138,11 @@ public class Day20Puzzle {
             charged = !charged;
             queSignal(new Signal(this, sendTo, charged));
         }
+
+        @Override
+        public void reset() {
+            charged = false;
+        }
     }
 
     class Conjunction extends RadioModule {
@@ -163,6 +168,13 @@ public class Day20Puzzle {
                 returnInputs.add(entry.getKey());
             }
             return returnInputs;
+        }
+
+        @Override
+        public void reset() {
+            for (Entry<RadioModule, Boolean> entry : inputs.entrySet()) {
+                inputs.put(entry.getKey(), false);
+            }
         }
 
         @Override
@@ -295,19 +307,25 @@ public class Day20Puzzle {
             }
         }
         resetRadios();
+        // System.out.println(count);
 
         return count;
     }
 
     public long recurseRadio(Conjunction toCheck, RadioModule button, String[] broadcastList) {
         long multiple = 1;
+        System.out.println();
         for (RadioModule radio : toCheck.getInputs()) {
             if (radio.getClass().equals(Conjunction.class)) {
-                multiple *= recurseRadio((Conjunction) radio, button, broadcastList);
+                long newMult = recurseRadio((Conjunction) radio, button, broadcastList);
+                multiple *= newMult;
             } else {
-                multiple *= bruteForceActivationTime(radio, button, broadcastList);
+                long newMult = bruteForceActivationTime(radio, button, broadcastList);
+                multiple *= newMult;
             }
+            System.out.println(toCheck.getLabel() + ": " + multiple);
         }
+        System.out.println();
         return multiple;
     }
 
@@ -364,6 +382,7 @@ public class Day20Puzzle {
 
                 if (inList(conjunctionModule.getSendTo(), "rx")) {
                     finalConjuction = conjunctionModule;
+                    System.out.println("final: " + finalConjuction.getLabel());
                 }
             }
         }
