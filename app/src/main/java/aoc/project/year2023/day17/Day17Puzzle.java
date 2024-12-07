@@ -1,7 +1,6 @@
 package aoc.project.year2023.day17;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import aoc.project.Constants;
@@ -9,10 +8,6 @@ import aoc.project.util.AocUtil;
 import aoc.project.util.FetchPuzzleInput;
 
 import org.apache.commons.lang3.time.StopWatch;
-import org.checkerframework.checker.units.qual.C;
-import org.w3c.dom.Node;
-
-import com.google.common.graph.Graph;
 
 public class Day17Puzzle {
     public static void main(String[] args) {

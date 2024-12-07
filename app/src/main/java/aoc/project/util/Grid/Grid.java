@@ -2,26 +2,38 @@ package aoc.project.util.Grid;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.function.Consumer;
 
 public class Grid<T extends Object> {
     private LinkedList<LinkedList<T>> internalGrid;
 
+    private int rows;
+    private int columns;
+
     public Grid(int rows, int columns) {
         LinkedList<LinkedList<T>> list = new LinkedList<>();
 
-        for (int i = 0; i < columns; i++) {
-            list.add(new LinkedList<>());
+        for (int i = 0; i < rows; i++) {
+            LinkedList<T> row = new LinkedList<>();
+            list.add(row);
+
+            for (int j = 0; j < columns; j++) {
+                row.add(null);
+            }
         }
+
+        this.rows = rows;
+        this.columns = columns;
 
         internalGrid = list;
     }
 
     public int getRowSize() {
-        return internalGrid.size();
+        return rows;
     }
 
     public int getColumnSize() {
-        return internalGrid.get(0).size();
+        return columns;
     }
 
     public boolean isValidCord(int row, int column) {
@@ -32,7 +44,7 @@ public class Grid<T extends Object> {
         if (isValidCord(row, column)) {
             return internalGrid.get(row).get(column);
         } else {
-            throw (new IndexOutOfBoundsException());
+            throw(new IndexOutOfBoundsException());
         }
     }
 
@@ -58,5 +70,32 @@ public class Grid<T extends Object> {
         }
 
         return newArr;
+    }
+
+    public Coordinates findInstance(T lookFor) {
+        for (int i = 0; i < internalGrid.size(); i++) {
+            for (int j = 0; j < internalGrid.get(0).size(); j++) {
+                // System.out.println(lookFor + "-" + getElement(i, j));
+                if (lookFor.equals(getElement(i, j))) {
+                    return new Coordinates(i, j);
+                }
+            }
+        }
+
+        return new Coordinates(-1, -1);
+    }
+
+    public T getElement(Coordinates coords) {
+        return getElement(coords.row(), coords.column());
+    }
+
+    public void printGrid(Consumer<T> action) {
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < columns; j++) {
+                action.accept(getElement(i, j));
+            }
+            System.out.println();
+        }
+        System.out.println();
     }
 }

@@ -22,8 +22,8 @@ public class Day21PuzzleTest {
     public void doPart1_givenExample1_assertNotNull(){
         List<String> lines = AocUtil.readFile("app/src/test/resources/puzzleInputs/year2023/day21Example1.txt");
         assertNotNull(lines);
-        assertEquals(0, lines.size());
-        assertEquals(-1, day21Puzzle.doPart1(lines)); 
+        assertEquals(11, lines.size());
+        assertEquals(16, day21Puzzle.doPart1(lines)); 
     }
 
     @Test

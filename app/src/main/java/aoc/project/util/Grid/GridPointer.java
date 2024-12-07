@@ -5,6 +5,10 @@ public class GridPointer<T extends Object> {
     private int pointerColumn;
     private Direction direction;
 
+    private int benchmarkPointerRow;
+    private int benchmarkPointerColumn;
+    private Direction benchmarkDirection;
+
     private Grid<T> pointGrid;
 
     public GridPointer(Grid<T> pointGrid, int row, int col, Direction direction) {
@@ -12,6 +16,12 @@ public class GridPointer<T extends Object> {
         pointerRow = row;
         pointerColumn = col;
         this.direction = direction;
+
+        setBenchmark();
+    }
+
+    public Coordinates getCoordinates() {
+        return new Coordinates(pointerRow, pointerColumn);
     }
 
     public void setDirection(Direction set) {
@@ -37,16 +47,25 @@ public class GridPointer<T extends Object> {
 
     public void shiftPointerPosition(int rowMove, int colMove) {
         pointerRow += rowMove;
-        pointerRow += colMove;
+        pointerColumn += colMove;
     }
+
+    public void setBenchmark() {
+        benchmarkPointerRow = pointerRow;
+        benchmarkPointerColumn = pointerColumn;
+        benchmarkDirection = direction;
+    }
+
+    public void returnToBenchmark() {
+        pointerRow = benchmarkPointerRow;
+        pointerColumn = benchmarkPointerColumn;
+        direction = benchmarkDirection;
+    }
+    
 
     public T shiftAndGetElement(int rowMove, int colMove) {
         shiftPointerPosition(rowMove, colMove);
         return getItemAtPointer();
-    }
-
-    public T getLocalElement(int rowAdjust, int colAdjust) {
-        return pointGrid.getElement(pointerRow + rowAdjust, pointerColumn + colAdjust);
     }
 
     public void moveUp(int magnitude) {

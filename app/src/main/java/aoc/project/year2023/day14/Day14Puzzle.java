@@ -1,6 +1,5 @@
 package aoc.project.year2023.day14;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;

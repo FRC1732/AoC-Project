@@ -16,8 +16,7 @@ public class GridUtils {
         return newGrid;
     }
 
-    
-    public <T> GridPointer<T> createPointer(Grid<T> grid, int row, int col, Direction dir) {
+    public static <T> GridPointer<T> createPointer(Grid<T> grid, int row, int col, Direction dir) {
         return new GridPointer<T>(grid, row, col, dir);
     }
 }
