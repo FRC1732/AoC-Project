@@ -85,6 +85,19 @@ public class Grid<T extends Object> {
         return new Coordinates(-1, -1);
     }
 
+    public ArrayList<Coordinates> getAllInstances(T lookFor) {
+        ArrayList<Coordinates> returnList = new ArrayList<>();
+        for (int i = 0; i < internalGrid.size(); i++) {
+            for (int j = 0; j < internalGrid.get(0).size(); j++) {
+                if (lookFor.equals(getElement(i, j))) {
+                    returnList.add(new Coordinates(i, j));
+                }
+            }
+        }
+
+        return returnList;
+    }
+
     public T getElement(Coordinates coords) {
         return getElement(coords.row(), coords.column());
     }

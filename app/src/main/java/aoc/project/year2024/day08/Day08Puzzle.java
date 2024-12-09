@@ -1,10 +1,16 @@
 package aoc.project.year2024.day08;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import aoc.project.Constants;
 import aoc.project.util.AocUtil;
 import aoc.project.util.FetchPuzzleInput;
+import aoc.project.util.Grid.Coordinates;
+import aoc.project.util.Grid.Direction;
+import aoc.project.util.Grid.Grid;
+import aoc.project.util.Grid.GridPointer;
+import aoc.project.util.Grid.GridUtils;
 
 import org.apache.commons.lang3.time.StopWatch;
 
@@ -15,7 +21,7 @@ public class Day08Puzzle {
         fetchPuzzleInput.fetchPuzzleInput(2024, 8);
 
         puzzle.part1();
-        //puzzle.part2();
+        puzzle.part2();
     }
 
     public void part1() {
@@ -45,13 +51,110 @@ public class Day08Puzzle {
     }
 
     public long doPart1(List<String> lines) {
+        long total = 0;
+
+        Grid<Character> grid = GridUtils.parseStringInput(lines);
+        GridPointer<Character> pointer = GridUtils.createPointer(grid, 0, 0, Direction.NORTH);
+
+        ArrayList<ArrayList<Coordinates>> uniqueSignals = new ArrayList<>();
+        ArrayList<Character> got = new ArrayList<>();
+
+        for (int i = 0; i < grid.getRowSize(); i++) {
+            for (int j = 0; j < grid.getRowSize(); j++) {
+                Character elementAt = grid.getElement(i, j);
+                if (!elementAt.equals('.') && !got.contains(elementAt))  {
+                    got.add(elementAt);
+                    uniqueSignals.add(grid.getAllInstances(elementAt));
+                }
+            }
+        }
+
+        for (ArrayList<Coordinates> allInstances : uniqueSignals) {
+
+            for (int i = 0; i < allInstances.size(); i++) {
+                Coordinates coordFirst = allInstances.get(i);
+
+                for (int j = i + 1; j < allInstances.size(); j++) {
+                    Coordinates coordSecond = allInstances.get(j);
+
+                    int rowDiff = coordSecond.row() - coordFirst.row();
+                    int colDiff = coordSecond.column() - coordFirst.column();
+
+                    if (grid.isValidCord(coordFirst.row() - rowDiff, coordFirst.column() - colDiff)) {
+                        grid.replaceElement(coordFirst.row() - rowDiff, coordFirst.column() - colDiff, '#');
+                    }
+
+                    if (grid.isValidCord(coordSecond.row() + rowDiff, coordSecond.column() + colDiff)) {
+                        grid.replaceElement(coordSecond.row() + rowDiff, coordSecond.column() + colDiff, '#');
+                    }
+
+                }
+            }
+        }
+
+        grid.printGrid(System.out::print);
+
         // Part 1 code goes here
-        return -1;
+        return grid.getAllInstances('#').size();
     }
 
     public long doPart2(List<String> lines) {
-        // Part 2 code goes here
-        return -1;
+        long total = 0;
+
+        Grid<Character> grid = GridUtils.parseStringInput(lines);
+        GridPointer<Character> pointer = GridUtils.createPointer(grid, 0, 0, Direction.NORTH);
+
+        ArrayList<ArrayList<Coordinates>> uniqueSignals = new ArrayList<>();
+        ArrayList<Character> got = new ArrayList<>();
+
+        for (int i = 0; i < grid.getRowSize(); i++) {
+            for (int j = 0; j < grid.getRowSize(); j++) {
+                Character elementAt = grid.getElement(i, j);
+                if (!elementAt.equals('.') && !got.contains(elementAt))  {
+                    got.add(elementAt);
+                    uniqueSignals.add(grid.getAllInstances(elementAt));
+                }
+            }
+        }
+
+        for (ArrayList<Coordinates> allInstances : uniqueSignals) {
+
+            for (int i = 0; i < allInstances.size(); i++) {
+                Coordinates coordFirst = allInstances.get(i);
+
+                for (int j = i + 1; j < allInstances.size(); j++) {
+                    Coordinates coordSecond = allInstances.get(j);
+
+                    int rowDiff = coordSecond.row() - coordFirst.row();
+                    int colDiff = coordSecond.column() - coordFirst.column();
+
+
+                    int harmonicRow = coordFirst.row();
+                    int harmonicCol = coordFirst.column();
+                    while (grid.isValidCord(harmonicRow, harmonicCol)) {
+                        grid.replaceElement(harmonicRow, harmonicCol, '#');
+                        harmonicRow -= rowDiff;
+                        harmonicCol -= colDiff;
+                    }
+
+                    harmonicRow += rowDiff;
+                    harmonicCol += colDiff;
+
+                    while (grid.isValidCord(harmonicRow, harmonicCol)) {
+                        grid.replaceElement(harmonicRow, harmonicCol, '#');
+                        harmonicRow += rowDiff;
+                        harmonicCol += colDiff;
+                    }
+                    
+
+                }
+            }
+        }
+
+        grid.printGrid(System.out::print);
+
+        // Part 1 code goes here
+        return grid.getAllInstances('#').size();
     }
 
 }
